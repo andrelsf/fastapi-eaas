@@ -6,7 +6,7 @@ from base64 import b64decode
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import unpad
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 
 from app.config import get_settings, Settings
 from app.api.http.requests import PostDecryptRequest
@@ -15,7 +15,7 @@ from app.api.http.requests import PostDecryptRequest
 router = APIRouter()
 
 
-@router.post("/crypto/decrypt")
+@router.post("/crypto/decrypt", status_code=200)
 def postDecrypt(postDecryptRequest: PostDecryptRequest, settings: Settings = Depends(get_settings)):
     try:
         key = settings.aes_key
@@ -28,4 +28,4 @@ def postDecrypt(postDecryptRequest: PostDecryptRequest, settings: Settings = Dep
 
         return json.loads(decryptedData)
     except (ValueError, KeyError):
-        return {'error': "Incorrect decryption"}
+        raise HTTPException(status_code=422, detail="Failed to decrypt data")

@@ -1,6 +1,5 @@
 # project/app/config.py
 
-
 import logging
 import os
 from functools import lru_cache
@@ -12,6 +11,7 @@ log = logging.getLogger("uvicorn")
 
 
 class Settings(BaseSettings):
+    aes_key: bytes = os.getenv("AES_KEY", "NONE")
     environment: str = os.getenv("ENVIRONMENT", "dev")
     testing: bool = os.getenv("TESTING", 0)
 

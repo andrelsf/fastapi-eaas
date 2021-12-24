@@ -1,7 +1,6 @@
 # project/app/config.py
 
-import logging
-import os
+import os, logging
 from functools import lru_cache
 
 from pydantic import BaseSettings

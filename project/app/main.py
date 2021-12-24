@@ -3,7 +3,7 @@
 import os, logging
 from fastapi import FastAPI
 
-from app.api.resources import ping, encrypt, decrypt
+from app.api.resources import ping, crypto
 
 
 log = logging.getLogger('uvicorn')
@@ -13,8 +13,7 @@ def create_application() -> FastAPI:
     application = FastAPI()
 
     application.include_router(ping.router)
-    application.include_router(encrypt.router)
-    application.include_router(decrypt.router)
+    application.include_router(crypto.router)
 
     return application
 

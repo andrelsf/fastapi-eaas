@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  fastapi-eaas:
+      labels:
+        br.dev.multicode.author: "Andre Ferreira <andre.dev.linux@gmail.com>"
+        br.dev.multicode.description: "Encrypt as a Service using Python and FastAPI."
+        br.dev.multicode.license: "MIT"
+      build: ./project
+      command: uvicorn app.main:app --reload --workers 1 --host 0.0.0.0 --port 8000
+      volumes:
+        - ./project:/usr/src/app
+      environment:
+        - AES_KEY=psZf9nOAKaeHatNMSt2MhQW6l30bP3OXzYIPnpBD
+        - ENVIRONMENT=dev
+        - TESTING=0
+      ports:
+        - "8000:8000"

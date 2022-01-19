@@ -7,11 +7,12 @@ services:
         br.dev.multicode.description: "Encrypt as a Service using Python and FastAPI."
         br.dev.multicode.license: "MIT"
       build: ./project
+      container_name: fastapi-eaas
       command: uvicorn app.main:app --reload --workers 1 --host 0.0.0.0 --port 8000
       volumes:
         - ./project:/usr/src/app
       environment:
-        - AES_KEY=psZf9nOAKaeHatNMSt2MhQW6l30bP3OXzYIPnpBD
+        - AES_KEY=psZf9nOAKaeHatNMSt2MhQW6l30bP3OX
         - ENVIRONMENT=dev
         - TESTING=0
       ports:

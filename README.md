@@ -40,3 +40,5 @@ docker-compose --version
 
 ## References
 
+- [PyCryptodome GCM](https://pycryptodome.readthedocs.io/en/latest/src/cipher/modern.html?highlight=GCM#gcm-mode-1)
+

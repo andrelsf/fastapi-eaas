@@ -9,8 +9,11 @@ from app.service.crypto import aes_encrypt, aes_decrypt
 
 router = APIRouter()
 
-
-@router.post("/crypto/encrypt")
+"""
+    POST /crypto/encrypt
+        Encrypt data default AES GCM
+"""
+@router.post("/crypto/encrypt", status_code=201)
 async def post_encrypt_aes_gcm(request: Request, settings: Settings = Depends(get_settings), response_model=dict[str, str, str]):
     try:
         data: bytes = await request.body()
@@ -18,7 +21,10 @@ async def post_encrypt_aes_gcm(request: Request, settings: Settings = Depends(ge
     except (Exception):
         raise HTTPException(status_code=422, detail="Failed to encrypt data")
 
-
+"""
+    POST /crypto/decrypt
+        Decrypt data default AES GCM
+"""
 @router.post("/crypto/decrypt", status_code=200)
 async def post_decrypt_aes_gcm(postDecryptRequest: Request, settings: Settings = Depends(get_settings)):
     try:
@@ -27,7 +33,10 @@ async def post_decrypt_aes_gcm(postDecryptRequest: Request, settings: Settings =
     except (ValueError, KeyError):
         raise HTTPException(status_code=422, detail="Failed to decrypt data")
 
-
+"""
+    POST /crypto/encrypt/{alg}/{mode}
+        Encrypt data with parameters on URI [alg=aes, mode=gcm,cbc]
+"""
 @router.post("/crypto/encrypt/{alg}/{mode}", status_code=201)
 async def post_encrypt(request: Request, alg: str, mode: str, settings: Settings = Depends(get_settings), response_model=dict[str, str, str]):
     try:
@@ -36,7 +45,10 @@ async def post_encrypt(request: Request, alg: str, mode: str, settings: Settings
     except (Exception):
         raise HTTPException(status_code=422, detail="Failed to encrypt data")
 
-
+"""
+    POST /crypto/decrypt/{alg}/{mode}
+        Decrypt data with parameters on URI [alg=aes, mode=gcm,cbc]
+"""
 @router.post("/crypto/decrypt/{alg}/{mode}", status_code=200)
 async def post_decrypt(postDecryptRequest: Request, alg: str, mode: str, settings: Settings = Depends(get_settings)):
     try:

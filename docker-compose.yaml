@@ -13,6 +13,7 @@ services:
         - ./project:/usr/src/app
       environment:
         - AES_KEY=psZf9nOAKaeHatNMSt2MhQW6l30bP3OX
+        - AES_GCM_HEADER=74351e8d70973859f41666a882378423
         - ENVIRONMENT=dev
         - TESTING=0
       ports:
